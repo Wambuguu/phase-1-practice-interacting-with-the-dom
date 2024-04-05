@@ -1,16 +1,16 @@
-const counterEl = document.getElementById('counter');
-const plusBtn = document.getElementById('plus');
-const minusBtn = document.getElementById('minus');
-const heartBtn = document.getElementById('heart');
-const pauseBtn = document.getElementById('pause');
-const commentForm = document.getElementById('comment-form');
-const commentList = document.getElementById('list');
-const likesList = document.querySelector('.likes'); // Select the likes list
+const counterEl = document.getElementById("counter");
+const plusBtn = document.getElementById("plus");
+const minusBtn = document.getElementById("minus");
+const heartBtn = document.getElementById("heart");
+const pauseBtn = document.getElementById("pause");
+const commentForm = document.getElementById("comment-form");
+const commentList = document.getElementById("list");
+const likesList = document.querySelector(".likes"); 
 
-let count = 0; // Current counter value
-let isPaused = false; // Flag to track pause state
-let likedNumbers = {}; // Object to store likes for each number
-let intervalId = null; // Variable to store the timer interval
+let count = 0;
+let isPaused = false; 
+let likedNumbers = {}; 
+let intervalId = null; 
 
 // Update the counter display
 function updateCounter() {
@@ -38,14 +38,14 @@ function stopTimer() {
 }
 
 // Handle click events for plus and minus buttons
-plusBtn.addEventListener('click', () => {
+plusBtn.addEventListener("click", () => {
   if (!isPaused) {
     count++;
     updateCounter();
   }
 });
 
-minusBtn.addEventListener('click', () => {
+minusBtn.addEventListener("click", () => {
   if (!isPaused && count > 0) {
     count--;
     updateCounter();
@@ -53,10 +53,12 @@ minusBtn.addEventListener('click', () => {
 });
 
 // Handle click event for the like button
-heartBtn.addEventListener('click', () => {
+heartBtn.addEventListener("click", () => {
   if (!isPaused) {
     const currentNumber = count;
-    likedNumbers[currentNumber] = likedNumbers[currentNumber] ? likedNumbers[currentNumber] + 1 : 1;
+    likedNumbers[currentNumber] = likedNumbers[currentNumber]
+      ? likedNumbers[currentNumber] + 1
+      : 1;
     updateLikesList();
   }
 });
@@ -65,14 +67,14 @@ heartBtn.addEventListener('click', () => {
 function updateLikesList() {
   likesList.innerHTML = ""; // Clear existing list items
   for (const number in likedNumbers) {
-    const likeItem = document.createElement('li');
+    const likeItem = document.createElement("li");
     likeItem.textContent = `${number} (Likes: ${likedNumbers[number]})`;
     likesList.appendChild(likeItem);
   }
 }
 
 // Handle click event for the pause button
-pauseBtn.addEventListener('click', () => {
+pauseBtn.addEventListener("click", () => {
   isPaused = !isPaused;
   if (isPaused) {
     stopTimer();
@@ -90,17 +92,15 @@ pauseBtn.addEventListener('click', () => {
 });
 
 // Handle form submission for comments (basic example)
-commentForm.addEventListener('submit', (event) => {
+commentForm.addEventListener("submit", (event) => {
   event.preventDefault(); // Prevent default form submission behavior
-  const comment = document.getElementById('comment-input').value.trim();
+  const comment = document.getElementById("comment-input").value.trim();
   if (comment) {
-    const commentItem = document.createElement('li');
+    const commentItem = document.createElement("li");
     commentItem.textContent = comment;
     commentList.appendChild(commentItem);
-    document.getElementById('comment-input').value = ""; 
+    document.getElementById("comment-input").value = "";
   }
 });
 
 startTimer();
-
-
